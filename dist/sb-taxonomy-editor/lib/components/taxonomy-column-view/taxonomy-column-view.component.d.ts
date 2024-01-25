@@ -1,0 +1,41 @@
+import { EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { FrameworkService } from '../../services/framework.service';
+import { Subscription } from 'rxjs';
+import { ConnectorService } from '../../services/connector.service';
+import { ApprovalService } from '../../services/approval.service';
+import { CardChecked, CardsCount, Card } from '../../models/variable-type.model';
+import * as i0 from "@angular/core";
+export declare class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges {
+    private frameworkService;
+    private connectorService;
+    private approvalService;
+    column: Card;
+    containerId: string;
+    connectorMapping: any;
+    updateTaxonomyTerm: EventEmitter<{
+        selectedTerm: any;
+        isSelected: boolean;
+    }>;
+    updateTermList: EventEmitter<CardChecked>;
+    cardsCount: EventEmitter<CardsCount>;
+    columnData: Array<Card>;
+    childSubscription: Subscription;
+    newTermSubscription: Subscription;
+    approvalTerm: any;
+    termshafall: Array<Card>;
+    constructor(frameworkService: FrameworkService, connectorService: ConnectorService, approvalService: ApprovalService);
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnInit(): void;
+    isExists(e: any): boolean;
+    subscribeEvents(): void;
+    insertUpdateHandler(e: any, next: any): void;
+    updateSelection1(data: any): void;
+    updateSelection(selection: any): void;
+    get columnItems(): Card[];
+    setConnectors(elementClicked: any, columnItem: any, mode: any): void;
+    removeConnectors(currentElement: any, prevCol: any, currentIndex: any): void;
+    selectedCard(event: any): void;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<TaxonomyColumnViewComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TaxonomyColumnViewComponent, "lib-taxonomy-column-view", never, { "column": "column"; "containerId": "containerId"; }, { "updateTaxonomyTerm": "updateTaxonomyTerm"; "updateTermList": "updateTermList"; "cardsCount": "cardsCount"; }, never, never, false>;
+}

@@ -1,0 +1,60 @@
+import { BehaviorSubject, Observable } from 'rxjs';
+import { NSFramework } from '../models/framework.model';
+import { HttpClient } from '@angular/common/http';
+import { IConnection } from '../models/connection.model';
+import { LocalConnectionService } from './local-connection.service';
+import * as i0 from "@angular/core";
+export declare class FrameworkService {
+    private http;
+    localConfig: LocalConnectionService;
+    categoriesHash: BehaviorSubject<NSFramework.ICategory[] | []>;
+    isDataUpdated: BehaviorSubject<boolean>;
+    currentSelection: BehaviorSubject<{
+        type: string;
+        data: any;
+        cardRef?: any;
+    } | null>;
+    termSubject: BehaviorSubject<any>;
+    list: Map<string, NSFramework.IColumnView>;
+    selectionList: Map<string, NSFramework.IColumnView>;
+    insertUpdateDeleteNotifier: BehaviorSubject<{
+        type: 'select' | 'insert' | 'update' | 'delete';
+        action: string;
+        data: any;
+    }>;
+    environment: any;
+    libConfig: IConnection;
+    frameworkId: string;
+    rootConfig: any;
+    constructor(http: HttpClient, localConfig: LocalConnectionService);
+    getFrameworkInfo(): Observable<any>;
+    createTerm(frameworkId: any, categoryId: any, requestBody: any): Observable<Object>;
+    updateTerm(frameworkId: any, categoryId: any, categoryTermCode: any, reguestBody: any): Observable<Object>;
+    publishFramework(): Observable<Object>;
+    getUuid(): any;
+    updateEnvironment(env: any): void;
+    getEnviroment(): any;
+    getFrameworkId(): string;
+    getNextCategory(currentCategory: string): NSFramework.ICategory;
+    getPreviousCategory(currentCategory: string): NSFramework.ICategory;
+    getParentTerm(currentCategory: string): NSFramework.IColumnView;
+    childClick(event: {
+        type: string;
+        data: any;
+    }): void;
+    resetAll(): void;
+    isLastColumn(colCode: any): boolean;
+    removeItemFromArray(array: [], item: any): any[];
+    set setTerm(res: any);
+    get getTerm(): any[];
+    getLocalTermsByParent(parentCode: string): any[];
+    getLocalTermsByCategory(parentCode: string): any[];
+    getLocalTermsCategory(category: string): any[];
+    formateData(response: any): void;
+    removeOldLine(): void;
+    setConfig(config: any): void;
+    getConfig(code: string): any;
+    isTermExistRemove(id: any): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<FrameworkService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<FrameworkService>;
+}

@@ -1,0 +1,30 @@
+import { EventEmitter, OnInit } from '@angular/core';
+import { ApprovalService } from '../../services/approval.service';
+import { FrameworkService } from '../../services/framework.service';
+import { LocalConnectionService } from '../../services/local-connection.service';
+import { CardSelection, CardChecked, Card } from '../../models/variable-type.model';
+import { MatDialog } from '@angular/material/dialog';
+import * as i0 from "@angular/core";
+export declare class TermCardComponent implements OnInit {
+    private frameworkService;
+    private localConnectionService;
+    private approvalService;
+    dialog: MatDialog;
+    private _data;
+    isApprovalRequired: boolean;
+    approvalList: Array<Card>;
+    app_strings: any;
+    set data(value: any);
+    get data(): any;
+    isSelected: EventEmitter<CardSelection>;
+    selectedCard: EventEmitter<CardChecked>;
+    constructor(frameworkService: FrameworkService, localConnectionService: LocalConnectionService, approvalService: ApprovalService, dialog: MatDialog);
+    ngOnInit(): void;
+    cardClicked(data: any, cardRef: any): void;
+    handleProductClick(term: any, event: any): void;
+    updateApprovalStatus(): void;
+    getColor(indexClass: number, cardRef: any, property: string, data: any): any;
+    remove(id: any): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<TermCardComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<TermCardComponent, "lib-term-card", never, { "data": "data"; }, { "isSelected": "isSelected"; "selectedCard": "selectedCard"; }, never, never, false>;
+}

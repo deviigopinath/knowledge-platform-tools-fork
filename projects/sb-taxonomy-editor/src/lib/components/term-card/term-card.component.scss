@@ -1,0 +1,75 @@
+@import "projects/sb-taxonomy-editor/src/styles/variable";
+
+.term-card {
+    border: 1px solid $light-gray;
+    padding: 0.5em;
+    margin: 0 0 1em 0;
+    background-color: $white;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    z-index: 45;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    .termSelection{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+    .term-card-parent {
+        display: flex;
+        width: 90%;
+        .term-card-content {
+            white-space: initial;
+            position: relative;
+            margin-left: 0.5em;
+            .card-title {
+                margin-bottom: 0.5em;
+            }
+            .card-description {
+                opacity: 0.5;
+            }
+        }
+    }
+    .term-card-checkbox {
+        width: 10%;
+    }
+    .mat-menu-trigger {
+        position: absolute;
+        top:0;
+        right:0;
+        z-index: 1000;
+       }
+}
+.term-card.selected {
+    color: $white;
+    border-style: none;
+}
+.clickable {
+    cursor: pointer;
+}
+.approve-flag{
+    position: absolute;
+    right: 5px;
+    top: 35px;
+    font-size: $font-size-24;
+}
+.mat-menu-item {
+    width: 200px;
+
+}
+
+::ng-deep .cdk-overlay-pane:has(.mat-menu-panel.term-dropdown) {
+    width: 200px;
+}
+.mat-menu-panel {
+    .term-dropdown {
+       padding:10px 0;
+    }
+}
+
+::ng-deep .custom-dialog-container  {
+    .mat-dialog-container{
+        background: #fff;
+        padding: 20px;
+    }
+}
