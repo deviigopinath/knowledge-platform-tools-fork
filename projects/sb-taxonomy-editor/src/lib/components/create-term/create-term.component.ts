@@ -26,6 +26,7 @@ export class CreateTermComponent implements OnInit {
   selectedTerm:Card = {};
   app_strings = labels;
   columnName:any;
+  isAreaAndTypeRequired: boolean;
    constructor(
     public dialogRef: MatDialogRef<CreateTermComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -37,6 +38,7 @@ export class CreateTermComponent implements OnInit {
     this.termLists = this.data.columnInfo.children
     this.columnName = this.data.columnInfo.name;
     this.initTermForm()
+    this.isAreaAndTypeRequired = this.frameWorkService.getEnviroment().additionalPropertiesInCategory4;
   }
 
   initTermForm() {
@@ -74,9 +76,9 @@ export class CreateTermComponent implements OnInit {
     this.createTermForm.get('name').patchValue(term.value.name)
     this.createTermForm.get('description').patchValue(term.value.description)
     this.createTermForm.get('description').disable()
-    this.createTermForm.get('area').patchValue(term.value.area)
+    this.createTermForm.get('area').patchValue(term.value.moreProperties.competencyArea)
     this.createTermForm.get('area').disable()
-    this.createTermForm.get('type').patchValue(term.value.type)
+    this.createTermForm.get('type').patchValue(term.value.moreProperties.competencyType)
     this.createTermForm.get('type').disable()
     this.disableCreate = true
   }

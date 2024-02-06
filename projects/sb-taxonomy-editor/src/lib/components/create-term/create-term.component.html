@@ -15,11 +15,11 @@
             <!-- <mat-label>Enter {{data.name}} name</mat-label> -->
             <textarea matInput formControlName="description" placeholder="{{app_strings.description}}"></textarea>
         </mat-form-field>
-        <mat-form-field *ngIf="columnName=='Competencies'">
+        <mat-form-field *ngIf="columnName=='Competencies' && isAreaAndTypeRequired">
             <!-- <mat-label>Enter {{data.area}} area</mat-label> -->
             <input matInput formControlName="area" placeholder="{{app_strings.area}}">
         </mat-form-field>
-        <mat-form-field *ngIf="columnName=='Competencies'">
+        <mat-form-field *ngIf="columnName=='Competencies' && isAreaAndTypeRequired">
             <!-- <mat-label>Enter {{data.type}} type</mat-label> -->
             <input matInput formControlName="type" placeholder="{{app_strings.type}}">
         </mat-form-field>

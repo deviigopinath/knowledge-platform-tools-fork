@@ -10,7 +10,8 @@ export const environment = {
   channelId: 'tarento',
   authToken: '',
   userToken:'',
-  isApprovalRequired: true
+  isApprovalRequired: true,
+  additionalPropertiesInCategory4: false
 };
 
 /*
