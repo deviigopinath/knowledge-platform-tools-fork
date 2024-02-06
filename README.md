@@ -14,7 +14,7 @@ npm i sb-taxonomy-editor
                  frameworkName: string,   
                  channelId: string,
                  authToken: string,
-                 isApprovalRequired:  boolen  // set default to false,
+                 isApprovalRequired:  boolean  // set default to false,
           }
 
 
