@@ -11,7 +11,7 @@ export const environment = {
   authToken: '',
   userToken:'',
   isApprovalRequired: true,
-  additionalPropertiesInCategory4: false
+  additionalProperties: []
 };
 
 /*

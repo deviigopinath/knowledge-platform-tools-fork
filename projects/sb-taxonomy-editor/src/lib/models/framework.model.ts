@@ -110,7 +110,7 @@ export namespace NSFramework {
         status: string;
         approvalStatus: string;
         parents?: ParentsElements[] | null;
-        additionalProperties: AdditionalProperties;
+        moreProperties: AdditionalProperties;
     }
 }
 
