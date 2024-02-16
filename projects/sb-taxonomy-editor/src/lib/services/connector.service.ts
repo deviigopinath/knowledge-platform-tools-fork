@@ -12,23 +12,8 @@ declare var LeaderLine: any;
 export class ConnectorService {
   connectorMap: any = {}
   elmWrapper: any
-  // assuming following structure
-  // {
-  //   'box1': {
-  //     source: ElementRef,
-  //     lines: [
-  //       {
-  //         target:' card2 of box1', 
-  //         line: '_line prototype object'
-  //       }
-  //     ]
-  //   }
-  // }
 
-  constructor(private frameworkService: FrameworkService) { 
-    // this.frameworkService.list.forEach((list, index)=> {
-    //   this.connectorMap['box'+list.index]= {}
-    // })
+  constructor(private frameworkService: FrameworkService) {
     console.log('connectorMap -------', this.connectorMap)
   }
 
@@ -38,9 +23,6 @@ export class ConnectorService {
     const _options = <LLOptions>{...defaultConfig, ...options}
     let _line;
     if (Array.isArray(target)) {
-      // target.forEach((_target) => {
-      //   _line = this.renderLine(source, _target, _options);
-      // });
       let connectedDots = [];
       target.forEach((_target) => {
         const tempLine = this.renderLine(source, _target, _options)
@@ -54,7 +36,6 @@ export class ConnectorService {
             try{
               tempLine && tempLine.position();
             } catch(e) {
-              // console.log('Error')
             }
           }, true);
         }
@@ -63,11 +44,9 @@ export class ConnectorService {
             try{
               tempLine && tempLine.position();
             } catch(e) {
-              // console.log('Error')
             }
           }, true);
         }
-        // tempLine.show('draw')
 
       });
     return connectedDots;
@@ -93,11 +72,8 @@ export class ConnectorService {
 
     _line.endPlugOutline = true;
     _line.startPlugOutline = true;
-    // _line.positionByWindowResize = false;
     _line.setOptions(options);
     _line.show('draw');
-    // this.elmWrapper.appendChild(document.querySelector('.leader-line:last-of-type'));
-    // this.position(_line)
     return _line;
   }
 
@@ -133,8 +109,4 @@ export class ConnectorService {
     this.updateConnectorsMap({})
   }
   
-  // _drawHeaderLine(source, target, options = defaultConfig) {
-  //   console.log(source,target,options);
-  //   new LeaderLine(source, target, options);
-  // }
 }

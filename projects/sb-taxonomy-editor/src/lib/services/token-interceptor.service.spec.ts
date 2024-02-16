@@ -38,7 +38,7 @@ describe('TokenInterceptorService', () => {
 
   it('should set auth token to intercept service', () => {
     const service: TokenInterceptorService = TestBed.inject(TokenInterceptorService);
-    const frameWorkServieSpy = spyOn(frameWorkServie, 'getEnviroment').and.returnValue(of({authToken:'evysrss'}));
+    const frameWorkServieSpy = spyOn(frameWorkServie, 'getEnvironment').and.returnValue(of({authToken:'evysrss'}));
     const requestMock = new HttpRequest('GET', '/test');
     const next: any = {
       handle: () => {

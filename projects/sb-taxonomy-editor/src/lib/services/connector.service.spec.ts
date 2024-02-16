@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ConnectorService } from './connector.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { defaultConfig, LLOptions } from '../constants/app-constant';
 
 declare var LeaderLine: any;
 
@@ -44,6 +45,11 @@ describe('ConnectorService', () => {
       expect(connectorService.connectorMap).toEqual({});
   });
 
+  it('should update the connectorMap', () => {
+    const map = { key: 'value' };
+    connectorService.updateConnectorsMap(map);
+    expect(connectorService.connectorMap).toEqual(map);
+  });
 
 });
 

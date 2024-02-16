@@ -39,7 +39,7 @@ class MockFrameworkService {
     isApprovalRequired: true
   }
 
-  getEnviroment() {
+  getEnvironment() {
     return this.environment;
   }
 

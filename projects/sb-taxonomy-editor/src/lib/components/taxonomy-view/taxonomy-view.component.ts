@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FrameworkService } from '../../services/framework.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTermComponent } from '../create-term/create-term.component';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { defaultConfig, headerLineConfig } from '../../constants/app-constant';
 import { labels } from '../../labels/strings';
-import { CardSelection, CardChecked, Card } from '../../models/variable-type.model';
+import { Card } from '../../models/variable-type.model';
 
 declare var LeaderLine: any;
 @Component({
@@ -61,7 +61,6 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
     this.initConfig();
     this.frameworkService.getFrameworkInfo().subscribe(res => {
       this.connectorSvc.removeAllLines()
-      this.updateLocalData()
       this.frameworkService.categoriesHash.value.forEach((cat:any) => {
         this.loaded[cat.code] = true
       })
@@ -77,20 +76,6 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
     
     this.updateFinalList(data)
     this.updateSelection(data.selectedTerm.category, data.selectedTerm.code);
-
-    // if (this.heightLighted.length === 0) {
-    //   this.heightLighted.push(data.selectedTerm);
-    //   return
-    // }
-    // this.heightLighted.every((cat, i) => {
-    //   if (cat.element.category.toLowerCase() === data.selectedTerm.element.category.toLowerCase()) {
-    //     this.heightLighted[i] = data.selectedTerm
-    //     return false
-    //   } else {
-    //     this.heightLighted.push(data.selectedTerm);
-    //     return false
-    //   }
-    // })
   }
   updateSelection(category: string, selectedTermCode: string) {
     this.frameworkService.list.get(category).children.map(item => {
@@ -117,25 +102,6 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
         this.init()
       },3000)
     }
-    // insert in colum 
-    // if (data.parentData) {
-    //   this.frameworkService.list.get(data.selectedTerm.category).children.push(data.selectedTerm)
-    //   const parent = this.frameworkService.getPreviousCategory(data.selectedTerm.category)
-    //   if (parent && parent.code) {
-    //     // insert in parent 
-    //     this.frameworkService.list.get(parent.code).children.map(a => {
-    //       if (data.parentData && a.code === data.parentData.code) {
-    //         if (!a.children) {
-    //           a.children = []
-    //         }
-    //         a.children.push(data.selectedTerm)
-    //       }
-    //     })
-    //     this.frameworkService.isDataUpdated.next(true)
-    //   }
-    // } else if (!data.parentData && !data.isSelected) {
-    //   this.frameworkService.list.get(data.selectedTerm.category).children.push(data.selectedTerm)
-    // }
     setTimeout(() => {
       this.loaded[data.selectedTerm.category] = true
     }, 100);
@@ -165,21 +131,13 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
         if (parentColumn) {
           res.parent = this.frameworkService.selectionList.get(parentColumn.code)
           res.parent.children? res.parent.children.push(res.term) :res.parent['children'] = [res.term]
-          // res.parent.associations?.push(res)
         }
-        // this.frameworkService.setTerm = res;
         this.updateFinalList({ selectedTerm: res.term, isSelected: false, parentData: res.parent, colIndex:colIndex })
-        // this.frameworkService.insertUpdateDeleteNotifier.next({ type: 'insert', action: res.parent.code, data: res.term })
       })
     }
   }
 
   get list(): any[] {
-    // console.log('this.frameworkService.list :: ',this.frameworkService.list)
-    // if (this.localList.length === 0) {
-    //   this.updateLocalData()
-    // }
-    // return this.localList
     return Array.from(this.frameworkService.list.values())
   }
   
@@ -197,73 +155,6 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
   getColumn(columnCode: string) {
     return this.frameworkService.list.get(columnCode)
   }
-  updateLocalData() {
-    // this.localList = Array.from(this.frameworkService.list.values()).map(lst => {
-    //   const selectedTerm = this.frameworkService.selectionList.get(lst.code)
-    //   lst.children.map(ch => { ch.selected = selectedTerm && ch.identifier === selectedTerm.identifier })
-    //   return lst
-    // })
-
-  }
-
-  // get updatedCategories() {
-  //   return this.updateTerms()
-  // }
-  // updateTerms(_term?: any) {
-  //   const finalList = []
-  //   this.list.forEach((category, idx) => {
-  //     const localTerms = this.frameworkService.getLocalTermsByColumn(category.code)
-  //     for (let j = 0; j < localTerms.length; j += 1) {
-  // const previous = this.frameworkService.getPreviousCategory(category.code)
-  // if (previous && finalList[idx - 1]) {
-  //   finalList[idx - 1].children.forEach(lastParent => {
-  //     localTerms[j].parent.forEach(parent => {
-  //       if (lastParent.code === parent.element.code) {
-  //         console.log("parent.element.code============>", parent.element.code)
-  //         if (!lastParent.children) {
-  //           lastParent.children = []
-  //         }
-  //         if (lastParent.children.findIndex(c => c.code === localTerms[j].code) === -1) {
-  //           lastParent.children.unshift(localTerms[j])
-  //         }
-  //       }
-  //     })
-  //   });
-
-  // }
-  //       if (category.code === localTerms[j].category) {
-  //         category.children.push(localTerms[j])
-  //       }
-  //     }
-  //     finalList.push(category)
-  //   })
-
-  //   return finalList
-  // }
-
-
-  // if (localTerms.length > 0) {
-  //   this.columnData.push(...localTerms)
-  //   this.column.children.forEach(col => {
-  //     localTerms.forEach(loc => {
-  //       if (col.code !== loc.code) {
-  //         loc.selected=true
-  //         this.column.children.push(loc)
-  //       }
-  //     })
-  // this.column.children.push(...localTerms)
-  // }
-  // }
-  // get list() {
-  //   let termsWithDraftStatus = []
-  //   console.log('this.frameworkService.list :: ',this.frameworkService.list)
-  //   this.frameworkService.list.forEach((cat,i) => {
-  //       termsWithDraftStatus = cat.children.filter(t => t.approvalStatus === 'Draft')
-  //       this.updateDraftStatusTerms(termsWithDraftStatus)
-  //   })
-  //   this.showActionBar = this.approvalRequiredTerms.length > 1 ? true:false
-  //   return this.frameworkService.list
-  // }
   
   newConnection() { 
     const dialog = this.dialog.open(ConnectorComponent, {
@@ -321,8 +212,6 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
         this.approvalService.createApproval(req).subscribe(res => {
           this.frameworkService.removeOldLine()
           this._snackBar.open('Terms successfully sent for Approval.', 'cancel')
-          // this.router.navigate(['/approval'])
-          // this.showActionBar = false;
         })
     } else {
       this.sentForApprove.emit(this.draftTerms)

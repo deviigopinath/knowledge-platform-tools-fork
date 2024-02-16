@@ -20,61 +20,7 @@ export class ConfigFrameworkComponent implements OnInit {
       console.log('Service...',res)
       this.frameworkCategories = res.result.framework.categories
     })
-    // this.categoriesRepresentations = categoryRepresentationsV1
   }
-
-//   updateCategory(data){
-//     for(let i=0;i<data.length;i++) {
-//         this.tempCategoryRepresentaions.push(
-//           {
-//             name: data[i].name,
-             
-//             terms:this.updateTermArry(data[i].name, data[i+1]?data[i+1].name:'', i)
-//           }
-//         )
-//     }
-//     this.categoriesRepresentations = this.tempCategoryRepresentaions;
-//   }
-
-
-
-//   updateTermArry(current,next, index){
-//     let term = []
-//     if(index%2 === 0){
-//       term = [
-//         {
-//           name:`${current} 1`,
-//           domId:`${current}1`
-//         },
-//         {
-//           name: `${current} 2`,
-//           selected:true,
-//           connected:true,
-//           domId:`${current.toLowerCase()}2`,
-//           connectedDomId:next?`${next.toLowerCase()}1`:''
-//         }
-//       ]
-//     } else {
-//       term = [
-//         {
-//           name:`${current} 1`,
-//           selected:true,
-//           connected:true,
-//           domId:`${current.toLowerCase()}1`,
-//           connectedDomId:next?`${next.toLowerCase()}2`:''
-//         },
-//         {
-//           name: `${current} 2`,
-//           domId:`${current}2`
-//         }
-//       ]
-//     }
-//     return term
-//   }
-// }
-
-
-
 
   updateCategory(name){
     this.removeOldLine()
@@ -84,8 +30,7 @@ export class ConfigFrameworkComponent implements OnInit {
             terms:this.updateTermArry(name,  this.categoriesRepresentations[this.categoriesRepresentations.length -1], this.categoriesRepresentations.length)
           }
     )
-    this.categoriesRepresentations = [...this.tempCategoryRepresentaions]    
-    // console.log(this.categoriesRepresentations)
+    this.categoriesRepresentations = [...this.tempCategoryRepresentaions]
 }
 
   updateTermArry(current, parent, index){
@@ -123,11 +68,11 @@ export class ConfigFrameworkComponent implements OnInit {
   }
 
   removeOldLine() {
-    const eles = Array.from(document.getElementsByClassName('leader-line') || [])
-    if(eles.length>0){
-        eles.forEach(ele => ele.remove());
+    const eles = document.getElementsByClassName('leader-line') as HTMLCollectionOf<Element>;
+    if (eles.length > 0) {
+        Array.prototype.forEach.call(eles, (ele: Element) => ele.remove());
     }
-  }
+}
 
   removeCategory(index){
     this.categoriesRepresentations.splice(index,1)

@@ -102,7 +102,7 @@ describe('FrameworkService', () => {
       isApprovalRequired: false
     }
     service.updateEnvironment(envData);
-    expect(service.getEnviroment().frameworkName).toEqual('fracing_fw');
+    expect(service.getEnvironment().frameworkName).toEqual('fracing_fw');
   });
 
   it('should get framework Id', () => {

@@ -5,9 +5,11 @@ describe('DatePipe', () => {
     const pipe = new DatePipe();
     expect(pipe).toBeTruthy();
   });
-  xit('create an instance', () => {
+
+  it('should transform date string to day', () => {
     const pipe = new DatePipe();
-    
-    expect(pipe.transform('11/09/20')).toEqual('11');
+    const result = pipe.transform('11/09/20');
+    expect(result).toEqual('09');
   });
+
 });

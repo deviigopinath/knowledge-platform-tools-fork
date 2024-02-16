@@ -11,7 +11,7 @@ export class TokenInterceptorService {
   constructor(private frameWorkServie: FrameworkService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler):   Observable<HttpEvent<any>> {
-    const env = this.frameWorkServie.getEnviroment()
+    const env = this.frameWorkServie.getEnvironment()
     const request = req.clone({  
       setHeaders: {  
         Authorization: env.authToken,  

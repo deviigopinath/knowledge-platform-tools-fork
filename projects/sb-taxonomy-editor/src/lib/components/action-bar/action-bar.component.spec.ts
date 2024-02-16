@@ -27,7 +27,7 @@ describe('ActionBarComponent', () => {
 
   it('should send it for approval', () => {
     const sendApprovalSpy = spyOn(component.sendApproval, 'emit');
-    component.SendForApproval();
+    component.sendForApproval();
     expect(sendApprovalSpy).toHaveBeenCalled();
   });
 
@@ -39,11 +39,11 @@ describe('ActionBarComponent', () => {
 
   it('should get approve Level Text', () => {
     const res = 'rse_sdf_text';
-    spyOn(component, 'getApproveLevelText').and.callThrough();
+    // spyOn(component, 'getApproveLevelText').and.callThrough();
     expect(component.getApproveLevelText(res)).toEqual('Approve text');
   });
-  it('should get approve Level Text', () => {
+  it('should return undefined if input is falsy', () => {
     const res =  undefined;
-       expect(component.getApproveLevelText(res)).toBeUndefined();
+    expect(component.getApproveLevelText(res)).toBeUndefined();
   });
 });

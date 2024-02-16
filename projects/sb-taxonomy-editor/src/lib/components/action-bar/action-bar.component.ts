@@ -7,18 +7,20 @@ import { labels } from '../../labels/strings';
   templateUrl: './action-bar.component.html',
   styleUrls: ['./action-bar.component.scss']
 })
-export class ActionBarComponent implements OnInit {
+export class ActionBarComponent {
   @Input() actionType;
   @Input() configType;
   @Output() sendApproval = new EventEmitter();
   @Output() closeAction = new EventEmitter();
   app_strings: any = labels;
+  approvalBtnText:string = '';
   constructor(private frameworkService: FrameworkService) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.actionType? this.getApproveLevelText(this.configType) :'Send for Approval'
   }
 
-  SendForApproval(){
+  sendForApproval(){
       this.sendApproval.emit('')
   }
 

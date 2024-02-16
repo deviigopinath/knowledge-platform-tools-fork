@@ -28,6 +28,9 @@ class MockFrameworkService {
   updateTerm(){
     return of({});
   }
+  getEnvironment() {
+    return of({});
+  }
 }
 
 describe('CreateTermComponent', () => {

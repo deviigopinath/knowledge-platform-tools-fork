@@ -21,7 +21,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { FrameworkService } from './services/framework.service';
 import { CreateCategoriesComponent } from './components/create-categories/create-categories.component'
 import { ConfigFrameworkComponent } from './containers/config-framework/config-framework.component'
@@ -52,7 +51,6 @@ import { ConfirmDialogBoxComponent } from './components/confirm-dialog-box/confi
 @NgModule({
   declarations: [
     SbTaxonomyEditorComponent,
-    DashboardComponent,
     ConfigFrameworkComponent,
     CreateCategoriesComponent,
     ConfigFrameworkComponent,

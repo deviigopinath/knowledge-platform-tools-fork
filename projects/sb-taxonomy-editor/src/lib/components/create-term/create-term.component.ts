@@ -38,7 +38,8 @@ export class CreateTermComponent implements OnInit {
     this.termLists = this.data.columnInfo.children
     this.columnName = this.data.columnInfo.name;
     this.initTermForm()
-    this.additionalProps = this.frameWorkService.getEnviroment().additionalProperties;
+    this.additionalProps = this.frameWorkService.getEnvironment().additionalProperties;
+    console.log('env',this.frameWorkService.getEnvironment());
   }
 
   initTermForm() {

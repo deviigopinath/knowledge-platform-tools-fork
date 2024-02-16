@@ -12,7 +12,7 @@ export class ApprovalService {
   approvalListSubject: BehaviorSubject<any> = new BehaviorSubject([]);
 
   constructor(private frameworkService: FrameworkService, private http: HttpClient) { 
-    this.environment = this.frameworkService.getEnviroment()
+    this.environment = this.frameworkService.getEnvironment()
   }
 
   createApproval(req){

@@ -6,7 +6,6 @@ import { NSFramework } from '../models/framework.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { v4 as uuidv4 } from 'uuid';
 import { IConnection } from '../models/connection.model';
-// import { LibConnectionService } from 'taxonomy-editor/lib/services/connection.service';
 import { LocalConnectionService } from './local-connection.service';
 
 @Injectable({
@@ -14,7 +13,6 @@ import { LocalConnectionService } from './local-connection.service';
 })
 export class FrameworkService {
   categoriesHash: BehaviorSubject<NSFramework.ICategory[] | []> = new BehaviorSubject<NSFramework.ICategory[] | []>([])
-  // termsByCategory: BehaviorSubject<NSFramework.ITermsByCategory[] | []> = new BehaviorSubject<NSFramework.ITermsByCategory[] | []>([])
   isDataUpdated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   currentSelection: BehaviorSubject<{ type: string, data: any, cardRef?: any } | null> = new BehaviorSubject<{ type: string, data: any, cardRef?: any } | null>(null)
   termSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null)
@@ -28,11 +26,7 @@ export class FrameworkService {
   constructor(
     private http: HttpClient,
     public localConfig: LocalConnectionService
-    // @Inject(LibConnectionService) private config
-  ) {
-    // this.fillCategories()
-
-  }
+  ) {}
 
   getFrameworkInfo(): Observable<any> {
     localStorage.removeItem('terms');
@@ -47,11 +41,6 @@ export class FrameworkService {
           throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
         }))
   }
-
-  // readTerms(frameworkId, categoryId, requestBody) {
-  //   return this.http.post(`/api/framework/v1/term/search?framework=${frameworkId}&category=${categoryId}`, requestBody).pipe(
-  //     map((res: any) => res.result))
-  // }
 
   createTerm(frameworkId, categoryId, requestBody) {
     return this.http.post(`/api/framework/v1/term/create?framework=${frameworkId}&category=${categoryId}`, requestBody)
@@ -73,7 +62,7 @@ export class FrameworkService {
     this.environment = env 
   }
 
-  getEnviroment() {
+  getEnvironment() {
     return this.environment
   }
 
@@ -137,32 +126,6 @@ export class FrameworkService {
     /* return the temporary array */
     return tmp;
   }
-  // set setTerm(res: any) {
-  //   this.termSubject.next(res)
-  //   let oldTerms = ([...this.getTerm] || [])
-  //   debugger
-  //   if (!res.parent && res.created) {
-  //     oldTerms.push(res.term)
-  //   } else {
-  //     if ((oldTerms.filter(ola => ola.code === res.parent.code) || []).length === 0) {
-  //       if (!res.parent.children) {
-  //         res.parent.children = []
-  //       }
-  //       res.parent.children.push(res.term)
-  //       oldTerms.push(res.parent)
-  //     } else {
-  //       oldTerms.map(ot => {
-  //         if (ot && ot.code === res.parent.code) {
-  //           if (!ot.children) {
-  //             ot.children = []
-  //           }
-  //           ot.children.push(res.term)
-  //         }
-  //       })
-  //     }
-  //   }
-  //   localStorage.setItem('terms', JSON.stringify(oldTerms))
-  // }
   set setTerm(res: any) {
     this.termSubject.next(res)
     let oldTerms = ([...this.getTerm])
@@ -203,14 +166,7 @@ export class FrameworkService {
 
   formateData(response: any) {
     this.frameworkId = response.result.framework.code;
-    // console.log('response', response);
-    // // const obj = FRAMEWORK;
-    // // const columns: NSFramework.IColumnView[] = [];
-    // // const obj = response
     (response.result.framework.categories).forEach((a, idx) => {
-      // if (idx <= 1) {
-      // const localData = this.getLocalTermsCategory(a.code)
-      // console.log("localData============>", localData)
       this.list.set(a.code, {
         code: a.code,
         identifier: a.identifier,
@@ -223,7 +179,6 @@ export class FrameworkService {
         category:a.category,
         associations: a.associations,
         config: this.getConfig(a.code),
-        // children: ([...a.terms, ...localData] || []).map(c => {
         children: (a.terms || []).map(c => {
           const associations = c.associations || []
           if (associations.length > 0) {
@@ -266,7 +221,6 @@ export class FrameworkService {
   }
 
   getConfig(code: string) {
-    // this.rootConfig = JSON.parse(localStorage.getItem('taxonomyConfig'))
     let categoryConfig: any;
     const defaultConfig = this.rootConfig.filter(con => con.frameworkId === 'default')[0]
     this.rootConfig.forEach((config: any, index: number) => {
