@@ -47,7 +47,6 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
                 }
              })
           })
-          // this.termshafall = [...this.termshafall]
           this.column.children.forEach((tr, i) => {
             if(!this.isExists(tr)){
               this.termshafall.push(tr)
@@ -59,10 +58,6 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
       })
     }
     this.connectorMapping = this.connectorService.connectorMap
-    // this.frameworkService.isDataUpdated.subscribe(() => {
-    //   this.ngOnInit()
-    // })
-    
   }
  
   isExists(e){
@@ -90,43 +85,13 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
         });
         this.setConnectors(e.cardRef, this.columnData, 'SINGLE')
         return
-        // console.log("SKIP: from subscription===>", "FOR " + this.category, e)
       } else {
         const next = this.frameworkService.getNextCategory(e.type);
-        // // console.log("ADD: from subscription===>", "FOR " + this.category, next, this.children)
         if (next && next.code === this.column.code) {
-          //   const back = this.frameworkService.getPreviousCategory(this.column.code)
-          //   console.log('current Saved ===========>', this.frameworkService.getLocalTermsByCategory(this.column.code))
-          //   const localTerms = []
-          //   this.frameworkService.getLocalTermsByCategory(this.column.code).forEach(f => {
-          // debugger
-          //     const lst = back ? this.frameworkService.selectionList.get(back.code) : null; //can use current
-          //     if (lst && f.parent.identifier === lst.identifier) {
-          //       localTerms.push(f.term)
-          //     }
-          //   })
-          //   // get last parent and filter Above
-
-          //   this.columnData = [...localTerms, ...(e.data.children || [])]
-          //     .filter(x => {
-          //       return x.category == this.column.code
-          //     }).map(mer => {
-          //       //**read local children for next */
-          //       // const nextChildren = this.frameworkService.getLocalTermsByParent(this.column.code)
-          //       // console.log("Saved ======================+>", nextChildren)
-          //       /**reset Next level children */
-          //       // this.column.children = this.column.children.map(col => { col.selected = false; return col })
-          //       // mer.selected = false
-          //       mer.children = ([...this.column.children.filter(x => { return x.code === mer.code }).map(a => a.children)].shift() || [])
-          //       return mer
-          //     })
-          //   // this.updateTerms()
-          
           setTimeout(() => {
             /* istanbul ignore next */
             this.setConnectors(e.cardRef, next && next.index < this.column.index ? [] : this.columnData, 'ALL')
           }, 100);
-          // console.log(this.columnData)
         }
 
         if (next && next.index < this.column.index) {
@@ -149,7 +114,6 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
   /* istanbul ignore next */
   insertUpdateHandler(e, next) {
     const back = this.frameworkService.getPreviousCategory(this.column.code)
-    // console.log('current Saved ===========>', this.frameworkService.getLocalTermsByCategory(this.column.code))
     const localTerms = []
     this.frameworkService.getLocalTermsByCategory(this.column.code).forEach(f => {
       const selectedParent = back ? this.frameworkService.selectionList.get(back.code) : null; //can use current
@@ -162,9 +126,6 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
       .filter(x => {
         return x.category == this.column.code
       }).map(mer => {
-        //**read local children for next */
-        // const nextChildren = this.frameworkService.getLocalTermsByParent(this.column.code)
-        // console.log("Saved ======================+>", nextChildren)
         /**reset Next level children */
         this.column.children = this.column.children.map(col => { col.selected = false; return col })
         mer.selected = false
@@ -177,66 +138,25 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
     } else {
       this.cardsCount.emit({category: this.column.code,count: 0});
     }
-    // this.updateTerms()
-
-    // console.log(this.columnData)
-
-
-
   }
   updateSelection1(data: any) { }
   updateSelection(selection: any) {
-    // console.log(selection.element.code, selection.isSelected)
-    // if(this.column.code==='medium'){
-    // console.log( this.column.children)
-    // }
-    // if (selection.element.category === this.column.code) {
-    //   this.updateTaxonomyTerm.emit({ isSelected: selection.isSelected, selectedTerm: selection.element })
-    // }
-    // this.column.children = this.column.children.map(col => {
-    //   if (col.code === selection.element.code) {
-    //     col.selected = true
-    //   } else {
-    //     col.selected = false
-    //   }
-    //   return col
-    // })
     console.log(selection)
   }
 
   get columnItems() {
-    // const selected = this.column.children.filter(f => { return f.selected })
-    // if (selected.length > 0) {
-    //   const data = this.columnData.map(cd => {
-    //     cd.selected = this.column.children.filter(f => { return cd.identifier === f.identifier }).map(s => s.selected)[0]
-    //     return cd
-    //   })
-    //   return data
-    // } else {
     return this.columnData
-    // }
   }
   /* istanbul ignore next */
   setConnectors(elementClicked, columnItem, mode) {
     this.removeConnectors(elementClicked, 'box' + (this.column.index - 1), this.column.index - 1)
-    // console.log('mode', mode)
-    // console.log('child ', columnItem)
-    // console.log('elementClicked', elementClicked)
-    // console.log('connectorMapping', this.connectorMapping)
     if (mode === 'ALL') {
-      // let tempconnectorMapping = {}
-      // this.connectorService.updateConnectorsMap(tempconnectorMapping)
-      // {
-      //   ['column' + (this.column.index- 1)]: ''
-
-      // }
       const ids = columnItem.map((c, i) => {
         return this.column.code + 'Card' + (i + 1)
       })
        /* istanbul ignore  */
       this.connectorMapping['box' + (this.column.index - 1)] = { source: elementClicked, lines: (ids || []).map(id => { return { target: id, line: '', targetType: 'id' } }) }
       this.connectorService.updateConnectorsMap(this.connectorMapping)
-      // console.log('next', next)
       const connectionLines = this.connectorService._drawLine(
         this.connectorMapping['box' + (this.column.index - 1)].source,
         this.connectorMapping['box' + (this.column.index - 1)].lines,
@@ -245,22 +165,7 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
         '#box' + this.column.index
       )
       this.connectorMapping['box' + (this.column.index - 1)].lines = connectionLines
-      // console.log('this.connectorMapping :: ----------------------', this.connectorMapping)
-      // if (cat.code === 'board') {
-      //   this.connectorService._drawLine('box0card0', this.connectorMapping['board']['box0card0'], {
-      //     startPlug: 'disc', endPlug: 'disc', color: 'black'
-      //   }, 'box0', 'box1')
-      // } else if (cat.code === 'medium') {
-      //   this.connectorService._drawLine('box1card1', this.connectorMapping['medium']['box1card1'], {
-      //     startPlug: 'disc', endPlug: 'disc', color: 'black'
-      //   }, 'box0', 'box1')
-      // } else if (cat.code === 'gradeLevel') {
-      //   this.connectorService._drawLine('box2card7', this.connectorMapping['grade']['box2card7'], {
-      //     startPlug: 'disc', endPlug: 'disc', color: 'black'
-      //   }, 'box0', 'box1')
     } else {
-      // console.log('inside else')
-      // console.log('this.column', this.column)
       const item = this.column.children.findIndex(c => c.selected) + 1
        if (this.column.index > 1) {
         this.connectorMapping['box' + (this.column.index - 1)].lines = [{ target: elementClicked, line: '', targetType: 'element' }]
@@ -273,7 +178,6 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
           '#box' + this.column.index
         )
         this.connectorMapping['box' + (this.column.index - 1)].lines = connectionLines
-        // console.log('this.connectorMapping :: ----------------------', this.connectorMapping)
       }
     }
     this.connectorService.updateConnectorsMap(this.connectorMapping)

@@ -67,7 +67,6 @@ flex-center {
 .cat-columns {
     position: relative;
     height: inherit;
-    /* z-index: 9; */
 }
 
 .col-container {
@@ -111,22 +110,14 @@ flex-center {
     overflow-y: scroll;
 }
 
-
-/* .cat-columns:hover .category-heading-sticky {
-    position: sticky;
-} */
-
 .container {
     overflow-y: auto;
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
     height: calc(100% - 16vh);
   }
   
   .container::-webkit-scrollbar {
-    /* WebKit */
     width: 0;
     height: 0;
   }

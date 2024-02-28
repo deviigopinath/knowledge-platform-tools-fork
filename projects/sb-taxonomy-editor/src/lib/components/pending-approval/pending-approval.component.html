@@ -22,33 +22,4 @@
             <a class="approve-view-link" routerLink="/approval/{{p.wfId}}"><mat-icon>{{app_strings.rightArrow}}</mat-icon></a>
         </mat-card-content>
     </mat-card>
-    <!-- <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
-        <mat-tab label="Sent for approval" active>  -->
-    <!-- <mat-card>
-                <mat-card-content>
-                <div *ngFor="let t of categories" class="col">
-                        <h4>{{t}}</h4>
-                </div>
-                </mat-card-content>
-            </mat-card> -->
-    <!-- <mat-card *ngFor="let p of approvalList">
-                    <mat-card-content>
-                        <div *ngFor="let t of createApprovalList(p.updateFieldValues)" class="col">
-                                <h4>{{t.name}}</h4>
-                                <div matTooltip="{{getTerms(t.children)}}" matTooltipPosition="above" matTooltipClass="custom-tooltip">
-                                        {{t.children[0].name}}
-                                        <ng-container *ngIf="t.children.length>1">
-                                        & {{t.children.length-1}} more...
-                                        </ng-container>
-                                </div>
-                              
-                        </div> 
-                        <a class="approve-view-link" routerLink="/approval/{{p.wfId}}"><mat-icon>keyboard_arrow_right</mat-icon></a>
-                    </mat-card-content>
-            </mat-card>
-        </mat-tab> -->
-    <!-- <mat-tab label="Approved"> Approved </mat-tab>
-        <mat-tab label="Rejected"> Rejected </mat-tab> -->
-    <!-- </mat-tab-group> -->
-
 </div>

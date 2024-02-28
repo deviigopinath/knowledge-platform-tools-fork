@@ -59,32 +59,6 @@ export class ApproveViewComponent implements OnInit {
   closeActionBar(e){
     this.showAction = false;
   }
-
-  /* ***** Don't delete this code might need in Future ***** */
-  // drawLine(){
-  //   this.lineRef = []
-  //   this.categories.forEach((cat, i) => {
-  //     this.listItems.forEach((item, j) => {
-  //       console.log(item)
-  //       if(cat === item.category){
-  //         for(let c of item.children){
-  //           if(c.category === this.categories[i+1] && this.isExistInTermList(c)){
-  //               const line = new LeaderLine(document.getElementById(item.name), document.getElementById(c.name))
-  //               line.color='#666'
-  //               line.endPlug = 'disc'
-  //               line.startPlug = 'disc'
-  //               this.lineRef.push(line)
-  //           }
-           
-  //         }
-  //       }
-  //      })
-  //   })
-  // }
-  // isExistInTermList(term){
-  //   const count = this.listItems.filter(item => item.identifier == term.identifier)
-  //   return count.length;
-  // }
   ngOnDestroy() {
     this.frameworkService.removeOldLine()
   }

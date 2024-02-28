@@ -75,7 +75,6 @@ export class FrameworkService {
       return a.code === currentCategory
     })
     let categoryLength = this.categoriesHash.getValue().length
-    /* istanbul ignore next */
     return (currentIndex + 1) <= categoryLength ? this.categoriesHash.getValue()[currentIndex + 1] : null
   }
 
@@ -83,7 +82,6 @@ export class FrameworkService {
     const currentIndex = this.categoriesHash.value.findIndex((a: NSFramework.ICategory) => {
       return a.code === currentCategory
     })
-    /* istanbul ignore next */
     return (currentIndex - 1) >= 0 ? this.categoriesHash.getValue()[currentIndex - 1] : null
   }
 

@@ -28,11 +28,6 @@ flex-center {
     padding: 0 2.5em;
 }
 
-/* .scrollable-y {
-    overflow: hidden;
-    overflow-y: scroll;
-} */
-
 .heightFix{
     height: 100vh;
     overflow: hidden;
@@ -45,13 +40,10 @@ flex-center {
 .container {
     overflow-y: scroll;
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
   }
   
   .container::-webkit-scrollbar {
-    /* WebKit */
     width: 0;
     height: 0;
   }
