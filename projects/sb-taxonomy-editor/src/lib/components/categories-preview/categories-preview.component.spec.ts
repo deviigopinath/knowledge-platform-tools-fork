@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { CategoriesPreviewComponent } from './categories-preview.component';
 
@@ -22,4 +22,31 @@ xdescribe('CategoriesPreviewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call drawLine after 200ms delay when data changes', fakeAsync(() => {
+    spyOn(component, 'drawLine');
+    component.ngOnChanges();
+    tick(200);
+    expect(component.drawLine).toHaveBeenCalled();
+  }));
+
+  it('should draw lines between connected terms', () => {
+    const testData = [
+      {
+        terms: [
+          { domId: 'term1', connected: true, parent: 'parent1' },
+          { domId: 'term2', connected: true, parent: 'parent2' }
+        ]
+      }
+    ];
+    component.data = testData;
+    component.drawLine();
+
+    expect(component.lineRef.length).toBe(2);
+    component.lineRef.forEach(line => {
+      expect(line).toBeTruthy();
+    });
+
+  });
+
 });

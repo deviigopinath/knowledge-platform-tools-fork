@@ -16,7 +16,7 @@ export class ConfigFrameworkComponent implements OnInit {
   constructor(private frameworkService: FrameworkService) { }
 
   ngOnInit() {
-    this.frameworkService.getFrameworkInfo().subscribe(res => {
+    this.frameworkService.getFrameworkInfo()?.subscribe(res => {
       console.log('Service...',res)
       this.frameworkCategories = res.result.framework.categories
     })
