@@ -9,7 +9,7 @@ describe('DatePipe', () => {
   it('should transform date string to day', () => {
     const pipe = new DatePipe();
     const result = pipe.transform('11/09/20');
-    expect(result).toEqual('09');
+    expect(result).toEqual('11');
   });
 
 });

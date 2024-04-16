@@ -6,7 +6,6 @@ import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NSFramework } from '../models/framework.model';
 import { taxonomyConfig } from '../../../../../src/assets/config';
-import { LocalConnectionService } from './local-connection.service';
 
 describe('FrameworkService', () => {
   let service: FrameworkService;

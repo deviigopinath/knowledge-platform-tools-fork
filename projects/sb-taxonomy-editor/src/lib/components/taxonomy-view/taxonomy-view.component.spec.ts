@@ -76,7 +76,11 @@ describe('TaxonomyViewComponent', () => {
     component.updateTaxonomyTerm(data);
     expect(updateDateSpy).toHaveBeenCalled();
   });
-
+  it('should update approve terms with draft terms', () => {
+    component.approvalList = [{code:'1'},{code:'2'}];
+    component.ngOnChanges();
+    expect(component.draftTerms.length).toBeGreaterThan(0);
+  });
   // it('should get updateFinalList', () => {
   //   service.list = list;
   //   const getNextCategorySpy = spyOn(service, 'getNextCategory').and.returnValue(nxtItem);
@@ -153,42 +157,6 @@ describe('TaxonomyViewComponent', () => {
   it('should get column code', () => {
     service.list = list;
     expect(component.getColumn('taxonomyCategory1').name).toEqual('Vice President');
-  });
-
-  it('should open dialog modal to new connection', () => {
-    const res = {
-      source:'online',
-      data: {
-        endpoint:'https://compass-dev.tarento.com'
-      }
-    };
-    let dialogSpy: jasmine.Spy;
-    let dialogRefSpyObj = jasmine.createSpyObj({ open:() => {}, afterClosed : of(res), close: 
-    null });
-    dialogRefSpyObj.componentInstance = { body: '' };
-    const openDialogSpy = spyOn(component.dialog, 'open').and.returnValue(dialogRefSpyObj);
-    service.list = list;
-   component.newConnection();
-    expect(openDialogSpy).toHaveBeenCalled();
-  });
-
-  it('should open dialog modal to init new connection and frmawork', () => {
-    const res = {
-      source:'online',
-      data: {
-        endpoint: undefined
-      }
-    };
-    let dialogSpy: jasmine.Spy;
-    let dialogRefSpyObj = jasmine.createSpyObj({ open:() => {}, afterClosed : of(res), close: 
-    null });
-    dialogRefSpyObj.componentInstance = { body: '' };
-    const openDialogSpy = spyOn(component.dialog, 'open').and.returnValue(dialogRefSpyObj);
-    const initSpy = spyOn(component, 'init');
-    service.list = list;
-   component.newConnection();
-    expect(openDialogSpy).toHaveBeenCalled();
-    expect(initSpy).toHaveBeenCalled();
   });
 
   it('should update draft status terms', () => {

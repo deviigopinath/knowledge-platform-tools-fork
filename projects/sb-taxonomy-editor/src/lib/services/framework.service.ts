@@ -6,7 +6,6 @@ import { NSFramework } from '../models/framework.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { v4 as uuidv4 } from 'uuid';
 import { IConnection } from '../models/connection.model';
-import { LocalConnectionService } from './local-connection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +23,7 @@ export class FrameworkService {
   frameworkId: string;
   rootConfig: any;  
   constructor(
-    private http: HttpClient,
-    public localConfig: LocalConnectionService
+    private http: HttpClient
   ) {}
 
   getFrameworkInfo(): Observable<any> {

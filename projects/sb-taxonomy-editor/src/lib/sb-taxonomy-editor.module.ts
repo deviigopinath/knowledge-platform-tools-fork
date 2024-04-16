@@ -22,20 +22,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { FrameworkService } from './services/framework.service';
-import { CreateCategoriesComponent } from './components/create-categories/create-categories.component'
-import { ConfigFrameworkComponent } from './containers/config-framework/config-framework.component'
 import { TaxonomyViewComponent } from './components/taxonomy-view/taxonomy-view.component'
 import { TermCardComponent } from './components/term-card/term-card.component'
 import { CommonModule } from '@angular/common';
-import { CategoriesPreviewComponent } from './components/categories-preview/categories-preview.component'
 import { ConnectorService } from './services/connector.service'
 import { CreateTermComponent } from './components/create-term/create-term.component';
 import { TaxonomyColumnViewComponent } from './components/taxonomy-column-view/taxonomy-column-view.component'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { TokenInterceptorService } from './services/token-interceptor.service'
-import { ConnectorComponent } from './components/connector/connector.component'
 import { IConnection } from './models/connection.model'
-import { LocalConnectionService } from './services/local-connection.service'
 import { ENVIRONMENT } from './services/connection.service'
 // export const LIB_OPTIONS = new InjectionToken<IConnection>('env')
 import { ActionBarComponent } from './components/action-bar/action-bar.component'
@@ -45,23 +40,15 @@ import { PendingApprovalComponent } from './components/pending-approval/pending-
 import { ApproveViewComponent } from './components/approve-view/approve-view.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { DatePipe } from './pipes/date.pipe'
-import { LandingPageComponent } from './containers/landing-page/landing-page.component'
 import { ConfirmDialogBoxComponent } from './components/confirm-dialog-box/confirm-dialog-box.component';
 
 @NgModule({
   declarations: [
     SbTaxonomyEditorComponent,
-    ConfigFrameworkComponent,
-    CreateCategoriesComponent,
-    ConfigFrameworkComponent,
     TaxonomyViewComponent,
-    LandingPageComponent,
     TermCardComponent,
     TaxonomyColumnViewComponent,
-    CategoriesPreviewComponent,
-    CategoriesPreviewComponent,
     CreateTermComponent,
-    ConnectorComponent,
     ActionBarComponent,
     ApprovalComponent,
     PendingApprovalComponent,
@@ -99,21 +86,15 @@ import { ConfirmDialogBoxComponent } from './components/confirm-dialog-box/confi
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},
     { provide: MAT_TABS_CONFIG, useValue: { animationDuration: '0ms' }},
     FrameworkService,
-    ConnectorService,
-    LocalConnectionService,
+    ConnectorService
   ],
   exports: [
     SbTaxonomyEditorComponent,
-    CreateCategoriesComponent,
-    ConfigFrameworkComponent,
     TaxonomyViewComponent,
     TermCardComponent,
-    CategoriesPreviewComponent,
-    ConfigFrameworkComponent
   ],
   entryComponents: [
     CreateTermComponent,
-    ConnectorComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
