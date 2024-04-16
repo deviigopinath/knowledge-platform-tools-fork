@@ -1,0 +1,28 @@
+<div class="dialog">
+    <div class="dialog-title" mat-dialog-title>{{app_strings.createNew}} {{data.columnInfo.name}}</div>
+    <form [formGroup]="createTermForm" novalidate (ngSubmit)="disableCreate?updateTerm():saveTerm()">
+        <mat-form-field>
+            <input matInput formControlName="name" placeholder="{{app_strings.name}}"   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event.option)">
+                <mat-option *ngFor="let option of filtedTermLists | async"  [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="isTermExist">{{app_strings.alreadyExist}}</mat-error>
+        <mat-form-field>
+            <textarea matInput formControlName="description" placeholder="{{app_strings.description}}"></textarea>
+        </mat-form-field>
+        <mat-form-field *ngIf="columnName=='Competencies' && additionalProps?.includes(data?.columnInfo?.code)">
+            <input matInput formControlName="area" placeholder="{{app_strings.area}}">
+        </mat-form-field>
+        <mat-form-field *ngIf="columnName=='Competencies' && additionalProps?.includes(data?.columnInfo?.code)">
+            <input matInput formControlName="type" placeholder="{{app_strings.type}}">
+        </mat-form-field>
+         <footer class="actions">
+            <button mat-raised-button color="default" type="reset" (click)="dialogClose('')">{{app_strings.cancel}}</button>
+            <button mat-raised-button color="primary" type="submit" cdkFocusInitial *ngIf="!disableCreate">{{app_strings.create}}</button>
+            <button mat-raised-button color="primary" type="submit" cdkFocusInitial *ngIf="disableCreate">{{app_strings.update}}</button>
+        </footer>
+    </form>
+</div>

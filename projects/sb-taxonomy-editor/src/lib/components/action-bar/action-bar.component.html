@@ -1,0 +1,12 @@
+<mat-card class="action-bar">
+    <div class="action-bar-buttons">
+        <div>
+            <button mat-raised-button color="default" (click)="closeActionBar()">{{app_strings.cancel}}</button>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="sendForApproval()">
+                {{approvalBtnText}}  
+           </button>
+        </div>
+    </div>
+</mat-card>

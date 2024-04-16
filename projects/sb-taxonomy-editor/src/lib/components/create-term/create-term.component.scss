@@ -1,0 +1,87 @@
+@import "projects/sb-taxonomy-editor/src/styles/variable";
+
+.dialog {
+    
+    .mat-dialog-title{
+        padding: 1em;
+        margin-bottom: 0;
+        background: $light-gray;
+    }
+
+    .mat-form-field {
+        width: 90%;
+        padding:0;
+        background: $white;
+        margin: 1em;
+        border-radius: 2px;
+        &-outline{
+            color:$white;
+        }
+        ::ng-deep .mat-form-field-wrapper{
+            padding-bottom:0;
+            .mat-form-field-infix{
+                padding:15px;
+                margin-top: 0;
+                border-top: 0;
+                textarea {
+                    resize: none;
+                }
+            }
+        }
+        &-disabled{
+            background:$light-gray;
+        }
+    }
+
+    .actions{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding:0 1em 1em 1em;
+    }
+
+    .mat-error{
+        padding:0 25px;
+        margin-top:-10px;
+    }
+}
+
+.dialog-title {
+    align-items: center;
+    display: flex;
+}
+
+::ng-deep .custom-dialog-container {
+.mat-dialog-container {
+    width:500px;
+    padding:0px;
+    border-radius: 0;
+    background: $light-gray;
+}
+}
+
+::ng-deep .cdk-overlay-pane {
+    @media only screen and (max-width: 1024px) {
+        width: 40% !important;
+    }
+    @media only screen and (max-width: 992px) {
+        width: 45% !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .dialog {
+        font-size: $font-size-12;
+        .dialog-title {
+            font-size: $font-size-24;
+            height: 1em;
+        }
+        button {
+            font-size: $font-size-12;
+            line-height: 3.5em;
+        }
+        .mat-raised-button {
+            padding: 0 3em;
+        }
+    }
+}

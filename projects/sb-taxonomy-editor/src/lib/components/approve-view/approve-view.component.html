@@ -1,0 +1,8 @@
+<ng-container *ngIf="listItems">
+    <lib-taxonomy-view 
+        [isApprovalView]="true" 
+        [approvalList]="listItems" 
+        [workFlowStatus]="workflowDetails?.currentStatus"
+        (sentForApprove)="approvalRequest($event)">
+    </lib-taxonomy-view>
+</ng-container>
