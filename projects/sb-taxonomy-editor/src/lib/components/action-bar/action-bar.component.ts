@@ -16,9 +16,7 @@ export class ActionBarComponent {
   approvalBtnText:string = '';
   constructor(private frameworkService: FrameworkService) { }
 
-  ngOnInit(){
-    this.actionType? this.getApproveLevelText(this.configType) :'Send for Approval'
-  }
+  ngOnInit(){}
 
   sendForApproval(){
       this.sendApproval.emit('')

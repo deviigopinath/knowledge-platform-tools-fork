@@ -30,7 +30,7 @@ export class CreateTermComponent implements OnInit {
    constructor(
     public dialogRef: MatDialogRef<CreateTermComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private frameWorkService: FrameworkService,
+    public frameWorkService: FrameworkService,
     private fb: FormBuilder
   ) { }
 

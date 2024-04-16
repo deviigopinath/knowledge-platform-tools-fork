@@ -32,8 +32,11 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
 
 
   ngOnInit(): void {
-    this.subscribeEvents()
-
+   this.subscribeEvents()
+    this.getApprovalList()
+    this.connectorMapping = this.connectorService.connectorMap
+  }
+  getApprovalList(){
     if (this.column.index === 1) {
       this.approvalService.getUpdateList().subscribe((list:any) => {
         this.approvalTerm = list.filter(item => this.column.code === item.category)
@@ -57,7 +60,6 @@ export class TaxonomyColumnViewComponent implements OnInit, OnDestroy, OnChanges
         }
       })
     }
-    this.connectorMapping = this.connectorService.connectorMap
   }
  
   isExists(e){

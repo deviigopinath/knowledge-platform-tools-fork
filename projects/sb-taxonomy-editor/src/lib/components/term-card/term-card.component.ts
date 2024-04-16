@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@a
 import { NSFramework } from '../../models/framework.model'
 import { ApprovalService } from '../../services/approval.service';
 import { FrameworkService } from '../../services/framework.service'
-import { LocalConnectionService } from '../../services/local-connection.service';
 import { labels } from '../../labels/strings';
 import { CardSelection, CardChecked, Card } from '../../models/variable-type.model';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -33,14 +32,11 @@ export class TermCardComponent implements OnInit {
   @Output() isSelected = new EventEmitter<CardSelection>()
   @Output() selectedCard = new EventEmitter<CardChecked>()
 
-  constructor(private frameworkService: FrameworkService, 
-    private localConnectionService: LocalConnectionService, 
+  constructor(private frameworkService: FrameworkService,
     private approvalService: ApprovalService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.isApprovalRequired = this.localConnectionService.getConfigInfo().isApprovalRequired
-    // console.log(this._data)
     this.updateApprovalStatus()
   }
 

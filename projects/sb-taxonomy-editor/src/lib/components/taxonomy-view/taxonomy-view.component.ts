@@ -2,8 +2,6 @@ import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angu
 import { FrameworkService } from '../../services/framework.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTermComponent } from '../create-term/create-term.component';
-import { ConnectorComponent } from '../connector/connector.component';
-import { LocalConnectionService } from '../../services/local-connection.service';
 import { IConnectionType } from '../../models/connection-type.model';
 import { Subscription } from 'rxjs';
 import { ConnectorService } from '../../services/connector.service';
@@ -40,8 +38,7 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   categoryList:any = [];
   app_strings: any = labels;
-  constructor(private frameworkService: FrameworkService, 
-    private localSvc: LocalConnectionService, 
+  constructor(private frameworkService: FrameworkService,
     public dialog: MatDialog, 
     private approvalService: ApprovalService,
     private router: Router,
@@ -105,8 +102,8 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.loaded[data.selectedTerm.category] = true
     }, 100);
-
   }
+  
   isEnabled(columnCode: string): boolean {
     return !!this.frameworkService.selectionList.get(columnCode)
   }
@@ -156,23 +153,6 @@ export class TaxonomyViewComponent implements OnInit, OnDestroy {
     return this.frameworkService.list.get(columnCode)
   }
   
-  newConnection() { 
-    const dialog = this.dialog.open(ConnectorComponent, {
-      data: {},
-      width: '90%',
-      // panelClass: 'custom-dialog-container' 
-    })
-    dialog.afterClosed().subscribe((res: IConnectionType) => {
-      if ((res.source === 'online' && res.data.endpoint) || (res.source === 'offline')) {
-        this.localSvc.localStorage = res
-        this.init()
-      } else if (res.source === 'online' && !res.data.endpoint) {
-        this.localSvc.localStorage = res
-        this.init()
-      }
-    })
-  }
-
   updateDraftStatusTerms(event){
     if(event.checked) {
       this.draftTerms.push(event.term)

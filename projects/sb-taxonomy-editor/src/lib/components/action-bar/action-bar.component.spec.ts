@@ -7,13 +7,13 @@ describe('ActionBarComponent', () => {
   let component: ActionBarComponent;
   let fixture: ComponentFixture<ActionBarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ ActionBarComponent ],
       imports: [HttpClientModule]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionBarComponent);

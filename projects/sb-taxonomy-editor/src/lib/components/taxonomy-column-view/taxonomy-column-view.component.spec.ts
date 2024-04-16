@@ -55,15 +55,15 @@ describe('TaxonomyColumnViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should update approval list', () => {
+  it('should update approval list', () => {
     component.approvalTerm = [];
     const getUpdateListSpy = spyOn(approvalService, 'getUpdateList').and.returnValue(of(approvalTerm));
-    component.ngOnInit();
+    component.getApprovalList();
     expect(getUpdateListSpy).toHaveBeenCalled();
     expect(component.approvalTerm.length).toEqual(1);
   });
 
-  xit('should update taxonomy term', () => {
+  it('should update taxonomy term', () => {
      component.termshafall = [{name:'t1', identifier:'a'}, {name:'t2', identifier:'b'}];
     frameworkService.currentSelection.next({type:'4g', data:['4g','4g']});
     const updateTaxonomyTermSpy = spyOn(component.updateTaxonomyTerm, 'emit');
@@ -71,7 +71,7 @@ describe('TaxonomyColumnViewComponent', () => {
     expect(updateTaxonomyTermSpy).toHaveBeenCalled();
   });
 
-  xit('should return selection list is undefned', () => {
+  it('should return selection list is undefned', () => {
     component.termshafall = [{name:'t1', identifier:'a'}, {name:'t2', identifier:'b'}];
    frameworkService.currentSelection.next(null);
    const updateTaxonomyTermSpy = spyOn(component.updateTaxonomyTerm, 'emit');
